@@ -15,7 +15,10 @@
         // 1. 通过 h 函数来创建一个 vnode
         const vnode = h(
             "div",
-            { class: "vnode" },
+            {
+                class: "vnode",
+                id: "aaa"
+            },
             [
                 h(
                     "h2",
@@ -32,6 +35,22 @@
 
         // 2. 通过 mount 函数，将 vnode 挂载到 div#app 上
         mount(vnode, document.querySelector("#app"))
+
+        // 延迟生效，以便看到效果
+        setTimeout(() => {
+            // 3. 创建新的 vnode，与 1 中 vnode 进行 diff 算法比较
+            const newVnode = h(
+                "h2",
+                {
+                    class: "new-vnode",
+                    id: "aaa"
+                },
+                "newVnode"
+            )
+
+            // 4. 通过 patch 函数，更新页面
+            patch(vnode, newVnode)
+        }, 2000)
     </script>
 </body>
 
