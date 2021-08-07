@@ -94,5 +94,42 @@ const patch = (n1, n2) => {
         }
 
         // 3. 处理 children
+        const oldChildren = n1.children || []
+        const newChildren = n2.children || []
+
+        // 3.1 情况一：newChildren 本身是一个string
+        if (typeof newChildren === "string") {
+            // 边界情况 edge case
+            if (typeof oldChildren === "string") {
+                if (newChildren !== oldChildren) {
+                    el.textContent = newChildren
+                }
+            } else {
+                el.innerHTML = newChildren
+            }
+        } else {
+            // 3.2 情况二：newChildren 本身是一个数组
+            if (typeof oldChildren === "string") {
+                el.innerHTML = ""
+                newChildren.forEach(vnode => mount(vnode, el))
+            } else {
+                // 都为数组时
+                // 1. 前面有相同节点时，进行 patch 操作
+                const commonLength = Math.min(oldChildren.length, newChildren.length)
+                for (let i = 0; i < commonLength; i++) {
+                    patch(oldChildren[i], newChildren[i])
+                }
+
+                // 2. newChildren.length > oldChildren.length，对新增节点进行挂载
+                if (newChildren.length > oldChildren.length) {
+                    newChildren.slice(commonLength).forEach(vnode => mount(vnode, el))
+                }
+
+                // 3. newChildren.length < oldChildren.length，对原有多余节点进行移除
+                if (newChildren.length < oldChildren.length) {
+                    oldChildren.slice(commonLength).forEach(vnode => el.removeChild(vnode.el))
+                }
+            }
+        }
     }
 }

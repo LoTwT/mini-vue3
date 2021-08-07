@@ -40,12 +40,25 @@
         setTimeout(() => {
             // 3. 创建新的 vnode，与 1 中 vnode 进行 diff 算法比较
             const newVnode = h(
-                "h2",
+                "div",
                 {
                     class: "new-vnode",
                     id: "aaa"
                 },
-                "newVnode"
+                [
+                    h(
+                        "h2",
+                        null,
+                        "newVnode"
+                    ),
+                    h(
+                        "button",
+                        {
+                            onClick() { }
+                        },
+                        "-1"
+                    )
+                ]
             )
 
             // 4. 通过 patch 函数，更新页面
