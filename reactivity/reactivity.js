@@ -81,18 +81,18 @@ const watchEffect = (effect) => {
 }
 
 // 测试代码
-const info = reactive({
-    counter: 100,
-    name: "lo",
-})
-const foo = reactive({
-    title: "foo"
-})
+// const info = reactive({
+//     counter: 100,
+//     name: "lo",
+// })
+// const foo = reactive({
+//     title: "foo"
+// })
 
-watchEffect(() => console.log("effect1: ", info.counter * 2, info.name))
-watchEffect(() => console.log("effect2: ", info.counter * info.counter))
-watchEffect(() => console.log("effect3: ", info.counter + 10, info.name))
-watchEffect(() => console.log("effect4: ", foo.title))
+// watchEffect(() => console.log("effect1: ", info.counter * 2, info.name))
+// watchEffect(() => console.log("effect2: ", info.counter * info.counter))
+// watchEffect(() => console.log("effect3: ", info.counter + 10, info.name))
+// watchEffect(() => console.log("effect4: ", foo.title))
 
-info.counter++
-info.name = "loo"
+// info.counter++
+// info.name = "loo"

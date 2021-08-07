@@ -44,12 +44,17 @@ const mount = (vnode, container) => {
  * 边界条件处理：事件 or 属性
  */
 const dealProp = (el, key, value, isAdd = true) => {
-    if (key.startsWith("on")) {
-        if (isAdd) el.addEventListener(key.slice(2).toLowerCase(), value)
-        else el.removeEventListener(key.slice(2).toLowerCase(), value)
+    if (isAdd) {
+        if (key.startsWith("on")) {
+            el.addEventListener(key.slice(2).toLowerCase(), value)
+        } else {
+            el.setAttribute(key, value)
+        }
     } else {
-        if (isAdd) el.setAttribute(key, value)
-        else el.removeAttribute(key)
+        if (key.startsWith("on")) {
+            el.removeEventListener(key.slice(2).toLowerCase(), value)
+        }
+        el.removeAttribute(key)
     }
 }
 
@@ -88,6 +93,7 @@ const patch = (n1, n2) => {
 
         // 2.2 删除旧的 props
         for (const key in oldProps) {
+            dealProp(el, key, oldProps[key], false)
             if (!(key in newProps)) {
                 dealProp(el, key, oldProps[key], false)
             }
