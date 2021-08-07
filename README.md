@@ -6,4 +6,8 @@
 ---
 
 - 渲染器 renderer
+  - h()
+  - mount()
+  - patch()
 - 响应式 reactivity
+  - 响应式的思想：收集依赖的函数，发生变化时，依次执行
