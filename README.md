@@ -1,5 +1,9 @@
 # miniVue
 
+study from coderwhy
+
+---
+
 对 vue 部分模块的最简单实现
 仅用作个人学习 :smile:
 
