@@ -1,6 +1,6 @@
 class ReactiveEffect {
   private _fn: Function
-  constructor(fn: Function) {
+  constructor(fn: Function, public scheduler?: Function) {
     this._fn = fn
   }
   run() {
@@ -10,8 +10,8 @@ class ReactiveEffect {
 }
 
 let activeEffect
-export const effect = (fn) => {
-  const _effect = new ReactiveEffect(fn)
+export const effect = (fn, options: any = {}) => {
+  const _effect = new ReactiveEffect(fn, options.scheduler)
   _effect.run()
 
   return _effect.run.bind(_effect)
@@ -43,7 +43,7 @@ export const trigger = (target, key) => {
   const depSet = depsMap?.get(key)
 
   if (depSet) {
-    depSet.forEach((dep) => dep.run())
+    depSet.forEach((dep) => (dep.scheduler ? dep.scheduler() : dep.run()))
   } else {
     throw Error("empty depSet")
   }
