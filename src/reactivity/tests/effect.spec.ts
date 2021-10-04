@@ -74,7 +74,10 @@ it("stop", () => {
   obj.prop = 2
   expect(dummy).toBe(2)
   stop(runner)
-  obj.prop = 3
+  // obj.prop = 3
+  // expect(dummy).toBe(2)
+  // obj.prop = obj.prop + 1 => get set
+  obj.prop++
   expect(dummy).toBe(2)
 
   // stopped effect should still be manually callable

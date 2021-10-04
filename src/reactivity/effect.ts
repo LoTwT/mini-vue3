@@ -1,5 +1,10 @@
 import { extend } from "../shared"
 
+let activeEffect
+let shouldTrack
+// 依赖收集容器 Map<target, Map<key, dep>>
+const targetMap = new Map<any, Map<any, Set<ReactiveEffect>>>()
+
 class ReactiveEffect {
   private _fn: Function
   public deps: Set<any>[] = []
@@ -10,8 +15,19 @@ class ReactiveEffect {
   }
 
   run() {
+    // 会收集依赖，用 shouldTrack 区分
+    if (!this.active) {
+      return this._fn()
+    }
+
+    // 应该收集
+    shouldTrack = true
     activeEffect = this
-    return this._fn()
+    const result = this._fn()
+    // reset
+    shouldTrack = false
+
+    return result
   }
 
   stop() {
@@ -27,9 +43,9 @@ class ReactiveEffect {
 
 const cleanupEffect = (effect) => {
   effect.deps.forEach((dep) => dep.delete(effect))
+  effect.deps.length = 0
 }
 
-let activeEffect
 export const effect = (fn, options: any = {}) => {
   const _effect = new ReactiveEffect(fn, options.scheduler)
   extend(_effect, options)
@@ -41,11 +57,12 @@ export const effect = (fn, options: any = {}) => {
   return runner
 }
 
-// 依赖收集容器 Map<target, Map<key, dep>>
-const targetMap = new Map<any, Map<any, Set<ReactiveEffect>>>()
+const isTracking = () => shouldTrack && activeEffect !== undefined
 
 // 依赖收集
 export const track = (target, key) => {
+  if (!isTracking()) return
+
   let depsMap = targetMap.get(target)
   if (!depsMap) {
     depsMap = new Map()
@@ -58,8 +75,7 @@ export const track = (target, key) => {
     depsMap.set(key, dep)
   }
 
-  if (!activeEffect) return
-
+  if (dep.has(activeEffect)) return
   dep.add(activeEffect)
   activeEffect.deps.push(dep)
 }
