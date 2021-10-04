@@ -57,7 +57,7 @@ export const effect = (fn, options: any = {}) => {
   return runner
 }
 
-const isTracking = () => shouldTrack && activeEffect !== undefined
+export const isTracking = () => shouldTrack && activeEffect !== undefined
 
 // 依赖收集
 export const track = (target, key) => {
@@ -75,6 +75,11 @@ export const track = (target, key) => {
     depsMap.set(key, dep)
   }
 
+  trackEffects(dep)
+}
+
+export const trackEffects = (dep) => {
+  // 看看 dep 之前有没有添加过，添加过的话，就不添加了
   if (dep.has(activeEffect)) return
   dep.add(activeEffect)
   activeEffect.deps.push(dep)
@@ -83,12 +88,17 @@ export const track = (target, key) => {
 // 触发依赖
 export const trigger = (target, key) => {
   const depsMap = targetMap.get(target)
-  const depSet = depsMap?.get(key)
+  const dep = depsMap?.get(key)
+  triggerEffects(dep)
+}
 
-  if (depSet) {
-    depSet.forEach((dep) => (dep.scheduler ? dep.scheduler() : dep.run()))
+export const triggerEffects = (dep) => {
+  if (dep) {
+    dep.forEach((effect) =>
+      effect.scheduler ? effect.scheduler() : effect.run(),
+    )
   } else {
-    throw Error("empty depSet")
+    throw Error("empty dep")
   }
 }
 
