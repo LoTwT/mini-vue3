@@ -19,3 +19,4 @@ export const shallowReadonly = (raw) =>
 
 export const isReactive = (value) => !!value[ReactiveFlags.IS_REACTIVE]
 export const isReadonly = (value) => !!value[ReactiveFlags.IS_READONLY]
+export const isProxy = (value) => isReactive(value) || isReadonly(value)
