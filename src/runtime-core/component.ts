@@ -40,7 +40,6 @@ function handleSetupResult(instance, setupResult) {
 function finishComponentSetup(instance) {
   const component = instance.type
 
-  if (component.render) {
-    instance.render = component.render
-  }
+  // 此处默认组件必须有 render 函数
+  instance.render = component.render
 }

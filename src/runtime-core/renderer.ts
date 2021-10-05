@@ -6,7 +6,9 @@ export function render(vnode, container) {
 }
 
 export function patch(vnode, container) {
-  // 判断是 component 还是 element
+  // todo 判断是 component 还是 element
+  // processElement()
+
   // 处理 component
   processComponent(vnode, container)
 }
