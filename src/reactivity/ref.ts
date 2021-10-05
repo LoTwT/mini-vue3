@@ -6,6 +6,7 @@ class RefImpl {
   private _rawValue: any
   private _value: any
   public dep
+  public __v_isRef = true
 
   constructor(value) {
     // 存储原始值
@@ -40,3 +41,6 @@ const trackRefValue = (ref) => {
 const convert = (value) => (isObject(value) ? reactive(value) : value)
 
 export const ref = (value) => new RefImpl(value)
+
+export const isRef = (ref) => !!ref.__v_isRef
+export const unRef = (ref) => (isRef(ref) ? ref.value : ref)
