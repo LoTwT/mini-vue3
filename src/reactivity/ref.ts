@@ -44,3 +44,20 @@ export const ref = (value) => new RefImpl(value)
 
 export const isRef = (ref) => !!ref.__v_isRef
 export const unRef = (ref) => (isRef(ref) ? ref.value : ref)
+
+// 用于模板 (template) 中...
+export const proxyRefs = (objectWithRefs) =>
+  new Proxy(objectWithRefs, {
+    get(target, key) {
+      // get => isRef ? .value : value
+      return unRef(Reflect.get(target, key))
+    },
+    set(target, key, value) {
+      // set => isRef ? .value = : value =
+      if (isRef(target[key]) && !isRef(value)) {
+        return (target[key].value = value)
+      } else {
+        return Reflect.set(target, key, value)
+      }
+    },
+  })
