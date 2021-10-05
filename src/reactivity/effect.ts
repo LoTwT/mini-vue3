@@ -5,7 +5,7 @@ let shouldTrack
 // 依赖收集容器 Map<target, Map<key, dep>>
 const targetMap = new Map<any, Map<any, Set<ReactiveEffect>>>()
 
-class ReactiveEffect {
+export class ReactiveEffect {
   private _fn: Function
   public deps: Set<any>[] = []
   private active = true
