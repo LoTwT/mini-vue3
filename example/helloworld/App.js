@@ -1,7 +1,10 @@
 import { h } from "../../lib/mini-vue.esm.js"
 
+window.self = null
 export const App = {
   render() {
+    window.self = this
+
     // 视图逻辑 (ui 逻辑)
     return h(
       "div",
@@ -9,9 +12,12 @@ export const App = {
         id: "root",
         class: ["red", "hard"],
       },
-      // `hello, ${this.msg}`,
+      // from
+      // 1. setupState
+      // 2. $el
+      `hello, ${this.msg}`,
       // `hello, mini-vue`,
-      [h("p", { class: "red" }, "hi"), h("p", { class: "blue" }, "mini-vue")],
+      // [h("p", { class: "red" }, "hi"), h("p", { class: "blue" }, "mini-vue")],
     )
   },
   setup() {

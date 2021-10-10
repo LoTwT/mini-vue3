@@ -1,7 +1,10 @@
+import { PublicInstanceProxyHandlers } from "./componentPublicInstance"
+
 export function createComponentInstance(vnode) {
   const component = {
     vnode,
     type: vnode.type,
+    setupState: {},
   }
 
   return component
@@ -17,6 +20,9 @@ export function setupComponent(instance) {
 function setupStatefulComponent(instance) {
   const component = instance.type
   const { setup } = component
+
+  // ctx
+  instance.proxy = new Proxy({ _: instance }, PublicInstanceProxyHandlers)
 
   if (setup) {
     // 如果是 function，则认为是 render 函数
