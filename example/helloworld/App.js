@@ -11,6 +11,12 @@ export const App = {
       {
         id: "root",
         class: ["red", "hard"],
+        onClick() {
+          console.log("trigger click")
+        },
+        onMousedown() {
+          console.log("trigger mousedown")
+        },
       },
       // from
       // 1. setupState
