@@ -35,10 +35,11 @@ function setupStatefulComponent(instance) {
   if (setup) {
     // 如果是 function，则认为是 render 函数
     // 如果是 object，注入到组件上下文中
+    setCurrentInstance(instance)
     const setupResult = setup(shallowReadonly(instance.props), {
       emit: instance.emit,
     })
-
+    setCurrentInstance(null)
     handleSetupResult(instance, setupResult)
   }
 }
@@ -58,4 +59,13 @@ function finishComponentSetup(instance) {
 
   // 此处默认组件必须有 render 函数
   instance.render = component.render
+}
+
+let currentInstance = null
+export function getCurrentInstance() {
+  return currentInstance
+}
+
+export function setCurrentInstance(instance) {
+  currentInstance = instance
 }
