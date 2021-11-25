@@ -1,4 +1,4 @@
-import { getCurrentInstance } from "./component";
+import { getCurrentInstance } from "./component"
 
 export function provide(key, value) {
   const currentInsitance: any = getCurrentInstance()

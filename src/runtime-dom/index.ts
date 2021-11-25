@@ -21,7 +21,7 @@ function insert(el, container) {
 const renderer: any = createRenderer({
   createElement,
   patchProp,
-  insert
+  insert,
 })
 
 export function createApp(...args) {
