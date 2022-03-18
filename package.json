@@ -4,6 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "dev": "tsup --dts --watch",
+    "build": "tsup --dts",
     "test": "vitest",
     "prettier": "prettier --write ."
   },
@@ -25,6 +27,7 @@
   "homepage": "https://github.com/LoTwT/mini-vue3#readme",
   "devDependencies": {
     "prettier": "^2.6.0",
+    "tsup": "^5.12.1",
     "typescript": "^4.6.2",
     "unplugin-auto-import": "^0.6.6",
     "vitest": "^0.7.4"
