@@ -28,3 +28,4 @@ coverage
 *.sw?
 
 auto-imports.d.ts
+pnpm-lock.yaml

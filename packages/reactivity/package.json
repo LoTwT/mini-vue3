@@ -1,0 +1,20 @@
+{
+  "name": "reactivity",
+  "version": "0.0.0",
+  "description": "reactivity",
+  "main": "index.js",
+  "scripts": {},
+  "keywords": [
+    "reactivity"
+  ],
+  "author": "LoTwT",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/LoTwT/mini-vue3.git"
+  },
+  "bugs": {
+    "url": "https://github.com/LoTwT/mini-vue3/issues"
+  },
+  "homepage": "https://github.com/LoTwT/mini-vue3#readme"
+}
