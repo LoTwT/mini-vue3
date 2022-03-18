@@ -1,16 +1,18 @@
 lockfileVersion: 5.3
 
-specifiers:
-  prettier: ^2.5.1
-  typescript: ^4.6.2
-  unplugin-auto-import: ^0.6.6
-  vitest: ^0.6.1
+importers:
 
-devDependencies:
-  prettier: 2.5.1
-  typescript: 4.6.2
-  unplugin-auto-import: 0.6.6
-  vitest: 0.6.1
+  .:
+    specifiers:
+      prettier: ^2.6.0
+      typescript: ^4.6.2
+      unplugin-auto-import: ^0.6.6
+      vitest: ^0.7.4
+    devDependencies:
+      prettier: 2.6.0
+      typescript: 4.6.2
+      unplugin-auto-import: 0.6.6
+      vitest: 0.7.4
 
 packages:
 
@@ -424,8 +426,8 @@ packages:
     engines: {node: '>=8.6'}
     dev: true
 
-  /postcss/8.4.8:
-    resolution: {integrity: sha512-2tXEqGxrjvAO6U+CJzDL2Fk2kPHTv1jQsYkSoMeOis2SsYaXRO2COxTdQp99cYvif9JTXaAk9lYGc3VhJt7JPQ==}
+  /postcss/8.4.12:
+    resolution: {integrity: sha512-lg6eITwYe9v6Hr5CncVbK70SoioNQIq81nsaG86ev5hAidQvmOeETBqs7jm43K2F5/Ley3ytDtriImV6TpNiSg==}
     engines: {node: ^10 || ^12 || >=14}
     dependencies:
       nanoid: 3.3.1
@@ -433,8 +435,8 @@ packages:
       source-map-js: 1.0.2
     dev: true
 
-  /prettier/2.5.1:
-    resolution: {integrity: sha512-vBZcPRUR5MZJwoyi3ZoyQlc1rXeEck8KgeC9AwwOn+exuxLxq5toTRDTSaVrXHxelDMHy9zlicw8u66yxoSUFg==}
+  /prettier/2.6.0:
+    resolution: {integrity: sha512-m2FgJibYrBGGgQXNzfd0PuDGShJgRavjUoRCw1mZERIWVSXF0iLzLm+aOqTAbLnC3n6JzUhAA8uZnFVghHJ86A==}
     engines: {node: '>=10.13.0'}
     hasBin: true
     dev: true
@@ -565,15 +567,15 @@ packages:
         optional: true
     dependencies:
       esbuild: 0.14.27
-      postcss: 8.4.8
+      postcss: 8.4.12
       resolve: 1.22.0
       rollup: 2.70.1
     optionalDependencies:
       fsevents: 2.3.2
     dev: true
 
-  /vitest/0.6.1:
-    resolution: {integrity: sha512-rgHgTO3xHCrbgmqYdUz4ViO0g2ekHeOfV60J6+1c6Ypzk1EqCE2sN8IpF4TDGs6BOvWIsVd/ob5c6U4Ozzu92g==}
+  /vitest/0.7.4:
+    resolution: {integrity: sha512-6kyJ/YZJFVj/zEVVHFyvLvAZlbg05yAyJrk7oP+FOCFanGRYK7bBEz4qsIpNHxX+dlf5vRkbBDjpdXzGL7udeA==}
     engines: {node: '>=14.14.0'}
     hasBin: true
     peerDependencies:
