@@ -1,7 +1,7 @@
 {
-  "name": "reactivity",
+  "name": "runtime-core",
   "version": "0.0.0",
-  "description": "reactivity",
+  "description": "runtime-core",
   "main": "index.js",
   "module": "./dist/index.mjs",
   "types": "./dist/index.d.ts",
@@ -10,7 +10,7 @@
     "dist"
   ],
   "keywords": [
-    "reactivity"
+    "runtime-core"
   ],
   "repository": {
     "type": "git",
