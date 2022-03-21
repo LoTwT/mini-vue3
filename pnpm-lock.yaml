@@ -9,7 +9,7 @@ importers:
       tsup: ^5.12.1
       typescript: ^4.6.2
       unplugin-auto-import: ^0.6.6
-      vitest: ^0.7.4
+      vitest: ^0.7.6
     dependencies:
       fast-glob: 3.2.11
     devDependencies:
@@ -17,7 +17,7 @@ importers:
       tsup: 5.12.1_typescript@4.6.2
       typescript: 4.6.2
       unplugin-auto-import: 0.6.6
-      vitest: 0.7.4
+      vitest: 0.7.6
 
 packages:
 
@@ -980,8 +980,8 @@ packages:
       fsevents: 2.3.2
     dev: true
 
-  /vitest/0.7.4:
-    resolution: {integrity: sha512-6kyJ/YZJFVj/zEVVHFyvLvAZlbg05yAyJrk7oP+FOCFanGRYK7bBEz4qsIpNHxX+dlf5vRkbBDjpdXzGL7udeA==}
+  /vitest/0.7.6:
+    resolution: {integrity: sha512-fqk0cn0I2BUpzwLfeZ725JeXJ7WGwDtVcVBksQ6SdyjrBi6aex8t3w70TWgyLOXgylS7FJ8C9DRap4MMgpkqYw==}
     engines: {node: '>=14.14.0'}
     hasBin: true
     peerDependencies:

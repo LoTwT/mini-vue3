@@ -1,5 +1,5 @@
 {
-  "name": "reactivity",
+  "name": "@mini-vue3/reactivity",
   "version": "0.0.0",
   "description": "reactivity",
   "main": "index.js",

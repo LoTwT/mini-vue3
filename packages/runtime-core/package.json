@@ -1,5 +1,5 @@
 {
-  "name": "runtime-core",
+  "name": "@mini-vue3/runtime-core",
   "version": "0.0.0",
   "description": "runtime-core",
   "main": "index.js",
