@@ -34,4 +34,39 @@ describe("effect", () => {
     expect(foo).toBe(12)
     expect(r).toBe("foo")
   })
+
+  it("scheduler", () => {
+    // 1. 通过 effect 的第二个参数，给定一个 scheduler 函数
+    // 2. effect 第一次执行 ( 依赖收集 )，执行 fn
+    // 3. 当触发响应式对象修改 ( set ) 时，不执行 fn 而是执行 scheduler
+    // 4. 当执行 runner 时，正常执行 fn
+    let dummy
+    let run
+
+    const scheduler = vi.fn(() => {
+      run = runner
+    })
+
+    const obj = reactive({ foo: 1 })
+    const runner = effect(
+      () => {
+        dummy = obj.foo
+      },
+      {
+        scheduler,
+      },
+    )
+
+    expect(scheduler).not.toHaveBeenCalled()
+    expect(dummy).toBe(1)
+    // should be called on first trigger
+    obj.foo++
+    expect(scheduler).toHaveBeenCalledTimes(1)
+    // should not run yet
+    expect(dummy).toBe(1)
+    // manually run
+    run()
+    // should have run
+    expect(dummy).toBe(2)
+  })
 })
