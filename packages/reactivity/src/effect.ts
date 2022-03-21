@@ -1,10 +1,14 @@
 import { extend } from "@mini-vue3/shared"
 
-// 存放 依赖收集Map 的 Map
-// Map<target, Map<key, Set<ReactiveEffect>>>
+/**
+ * 存放 依赖收集Map 的 Map
+ * Map<target, Map<key, Set<ReactiveEffect>>>
+ */
 const targetMap = new Map<any, Map<any, Set<ReactiveEffect>>>()
 
-// 存放当前 effect 的 ReactiveEffect 类实例
+/**
+ * 存放当前 effect 的 ReactiveEffect 类实例
+ */
 let activeEffect: ReactiveEffect
 
 class ReactiveEffect {
@@ -23,7 +27,7 @@ class ReactiveEffect {
    */
   private active = true
 
-  constructor(private _fn: Function, public scheduler?: Function) {}
+  constructor(private _fn: () => void, public scheduler?: () => void) {}
 
   run() {
     activeEffect = this
@@ -54,7 +58,7 @@ function cleanupEffect(effect: ReactiveEffect) {
 }
 
 interface EffectOptions {
-  scheduler?: Function
+  scheduler?: () => void
   onStop?: () => void
 }
 
@@ -63,7 +67,7 @@ export interface ReactiveEffectRunner<T = any> {
   effect: ReactiveEffect
 }
 
-export function effect(fn: Function, options?: EffectOptions) {
+export function effect(fn: () => void, options?: EffectOptions) {
   const _effect = new ReactiveEffect(fn, options?.scheduler)
 
   // 将 options 注入到 _effect 上
