@@ -6,13 +6,13 @@ const packageNames = fg
   .map((p) => p.split("/")[1])
 
 export default defineConfig([
-  {
-    name: "mini-vue3",
-    entry: ["packages/**/src/index.ts"],
-    format: ["esm", "cjs"],
-    minify: true,
-    target: "node16",
-  },
+  // {
+  //   name: "mini-vue3",
+  //   entry: ["packages/**/src/index.ts"],
+  //   format: ["esm", "cjs"],
+  //   minify: true,
+  //   target: "node16",
+  // },
   ...packageNames.map(
     (n): Options => ({
       name: n,
