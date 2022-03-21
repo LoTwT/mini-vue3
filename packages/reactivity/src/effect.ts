@@ -80,6 +80,9 @@ export function effect(fn: Function, options?: EffectOptions) {
  * 依赖收集
  */
 export function track(target, key) {
+  // todo 一个优雅的注释
+  if (!activeEffect) return
+
   // target => key => dep
   let depsMap = targetMap.get(target)
   if (!depsMap)
