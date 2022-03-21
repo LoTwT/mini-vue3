@@ -1,5 +1,5 @@
 {
-  "name": "reactivity",
+  "name": "@mini-vue3/reactivity",
   "version": "0.0.0",
   "description": "reactivity",
   "main": "index.js",
@@ -14,7 +14,8 @@
   ],
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/LoTwT/mini-vue3.git"
+    "url": "git+https://github.com/LoTwT/mini-vue3.git",
+    "directory": "packages/reactivity"
   },
   "author": "LoTwT",
   "license": "MIT",

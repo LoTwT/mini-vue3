@@ -10,7 +10,8 @@
     "resolveJsonModule": true,
     "esModuleInterop": true,
     "lib": ["esnext", "dom"],
-    "types": ["vitest/globals"]
+    "types": ["vitest/globals"],
+    "noImplicitAny": false
   },
   "include": ["packages/*/src", "packages/*/__test__"]
 }
