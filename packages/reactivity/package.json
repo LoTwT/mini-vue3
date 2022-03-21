@@ -22,5 +22,8 @@
   "bugs": {
     "url": "https://github.com/LoTwT/mini-vue3/issues"
   },
-  "homepage": "https://github.com/LoTwT/mini-vue3#readme"
+  "homepage": "https://github.com/LoTwT/mini-vue3#readme",
+  "dependencies": {
+    "@mini-vue3/shared": "workspace:^0.0.0"
+  }
 }

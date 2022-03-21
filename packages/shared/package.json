@@ -1,7 +1,7 @@
 {
-  "name": "@mini-vue3/runtime-core",
+  "name": "@mini-vue3/shared",
   "version": "0.0.0",
-  "description": "runtime-core",
+  "description": "shared",
   "main": "index.js",
   "module": "./dist/index.mjs",
   "types": "./dist/index.d.ts",
@@ -10,12 +10,12 @@
     "dist"
   ],
   "keywords": [
-    "runtime-core"
+    "shared"
   ],
   "repository": {
     "type": "git",
     "url": "git+https://github.com/LoTwT/mini-vue3.git",
-    "directory": "packages/runtime-core"
+    "directory": "packages/shared"
   },
   "author": "LoTwT",
   "license": "MIT",
