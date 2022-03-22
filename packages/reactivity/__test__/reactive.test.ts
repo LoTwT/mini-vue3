@@ -1,4 +1,4 @@
-import { reactive } from "../src/reactive"
+import { isReactive, reactive } from "../src/reactive"
 
 describe("reactive", () => {
   it("happy path", () => {
@@ -9,5 +9,8 @@ describe("reactive", () => {
     expect(observed).not.toBe(origin)
     // 代理的 observed 能正常访问 foo
     expect(observed.foo).toBe(1)
+
+    expect(isReactive(observed)).toBe(true)
+    expect(isReactive(origin)).toBe(false)
   })
 })
