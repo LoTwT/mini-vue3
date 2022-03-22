@@ -1,22 +1,20 @@
-import { track, trigger } from "./effect"
+import { mutableHandlers, readonlyHandlers } from "./baseHandlers"
 
 export function reactive(raw) {
-  return new Proxy(raw, {
-    get(target, key) {
-      const res = Reflect.get(target, key)
+  return createActiveObject(raw, mutableHandlers)
+}
 
-      // 依赖收集
-      track(target, key)
+export function readonly(raw) {
+  return createActiveObject(raw, readonlyHandlers)
+}
 
-      return res
-    },
-    set(target, key, value) {
-      const res = Reflect.set(target, key, value)
-
-      // 依赖触发
-      trigger(target, key)
-
-      return res
-    },
-  })
+/**
+ * 创建 Proxy 的包装方法
+ * 更便于阅读
+ * @param raw
+ * @param baseHandlers
+ * @returns
+ */
+function createActiveObject(raw, baseHandlers) {
+  return new Proxy(raw, baseHandlers)
 }
