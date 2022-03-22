@@ -86,9 +86,12 @@ describe("effect", () => {
     obj.prop = 3
     expect(dummy).toBe(2)
 
+    obj.prop++
+    expect(dummy).toBe(2)
+
     // stopped effect should be actived after calling runner
     runner()
-    expect(dummy).toBe(3)
+    expect(dummy).toBe(4)
   })
 
   // effect 失活后的回调函数

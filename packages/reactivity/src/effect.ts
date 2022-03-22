@@ -11,6 +11,11 @@ const targetMap = new Map<any, Map<any, Set<ReactiveEffect>>>()
  */
 let activeEffect: ReactiveEffect
 
+/**
+ * 是否应该进行依赖收集
+ */
+let shouldTrack: boolean
+
 class ReactiveEffect {
   /**
    * 反向收集的所有依赖的 Set 容器
@@ -30,8 +35,15 @@ class ReactiveEffect {
   constructor(private _fn: () => void, public scheduler?: () => void) {}
 
   run() {
+    if (!this.active) return this._fn()
+
+    shouldTrack = true
     activeEffect = this
-    return this._fn()
+
+    const result = this._fn()
+
+    shouldTrack = false
+    return result
   }
 
   /**
@@ -55,6 +67,7 @@ class ReactiveEffect {
  */
 function cleanupEffect(effect: ReactiveEffect) {
   effect.deps.forEach((dep) => dep.delete(effect))
+  effect.deps.length = 0
 }
 
 interface EffectOptions {
@@ -80,12 +93,17 @@ export function effect(fn: () => void, options?: EffectOptions) {
   return runner
 }
 
+function isTracking() {
+  return shouldTrack && activeEffect != null
+}
+
 /**
  * 依赖收集
  */
 export function track(target, key) {
   // todo 一个优雅的注释
-  if (!activeEffect) return
+  // if (!activeEffect || !shouldTrack) return
+  if (!isTracking()) return
 
   // target => key => dep
   let depsMap = targetMap.get(target)
@@ -95,6 +113,8 @@ export function track(target, key) {
   let dep = depsMap.get(key)
   if (!dep) depsMap.set(key, (dep = new Set()))
 
+  // 如果已经在 dep 中，不再重复收集
+  if (dep.has(activeEffect)) return
   dep.add(activeEffect)
 
   // 反向收集所有依赖的 Set 容器
