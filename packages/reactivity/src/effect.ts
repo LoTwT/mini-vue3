@@ -16,7 +16,7 @@ let activeEffect: ReactiveEffect
  */
 let shouldTrack: boolean
 
-class ReactiveEffect {
+export class ReactiveEffect {
   /**
    * 反向收集的所有依赖的 Set 容器
    */
@@ -93,7 +93,7 @@ export function effect(fn: () => void, options?: EffectOptions) {
   return runner
 }
 
-function isTracking() {
+export function isTracking() {
   return shouldTrack && activeEffect != null
 }
 
@@ -113,6 +113,10 @@ export function track(target, key) {
   let dep = depsMap.get(key)
   if (!dep) depsMap.set(key, (dep = new Set()))
 
+  trackEffects(dep)
+}
+
+export function trackEffects(dep: Set<ReactiveEffect>) {
   // 如果已经在 dep 中，不再重复收集
   if (dep.has(activeEffect)) return
   dep.add(activeEffect)
@@ -129,11 +133,15 @@ export function trigger(target, key) {
   const dep = depsMap?.get(key)
 
   if (dep) {
-    dep.forEach((effect) => {
-      if (effect.scheduler) effect.scheduler()
-      else effect.run()
-    })
+    triggerEffects(dep)
   }
+}
+
+export function triggerEffects(dep: Set<ReactiveEffect>) {
+  dep.forEach((effect) => {
+    if (effect.scheduler) effect.scheduler()
+    else effect.run()
+  })
 }
 
 /**
