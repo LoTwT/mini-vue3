@@ -1,4 +1,4 @@
-import { isReadonly, readonly } from "../src/reactive"
+import { isProxy, isReadonly, readonly } from "../src/reactive"
 
 describe("readonly", () => {
   it("happy path", () => {
@@ -10,6 +10,8 @@ describe("readonly", () => {
 
     expect(isReadonly(wrapped)).toBe(true)
     expect(isReadonly(origin)).toBe(false)
+
+    expect(isProxy(wrapped)).toBe(true)
   })
 
   it("nested readonly", () => {

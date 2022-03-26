@@ -29,6 +29,10 @@ export function isReadonly(value) {
   return !!value[ReactiveFlags.IS_READONLY]
 }
 
+export function isProxy(value) {
+  return isReactive(value) || isReadonly(value)
+}
+
 /**
  * 创建 Proxy 的包装方法
  * 更便于阅读
