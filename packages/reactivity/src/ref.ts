@@ -14,6 +14,7 @@ class RefImpl {
   private _rawValue
   // ref 的依赖
   public dep: Set<ReactiveEffect>
+  public __v_isRef = true
 
   constructor(value) {
     // 存储原始值
@@ -58,4 +59,12 @@ function trackRefValue(ref: RefImpl) {
 
 export function ref(value) {
   return new RefImpl(value)
+}
+
+export function isRef(ref) {
+  return !!ref.__v_isRef
+}
+
+export function unRef(ref) {
+  return isRef(ref) ? ref.value : ref
 }
