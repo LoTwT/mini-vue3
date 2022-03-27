@@ -18,7 +18,7 @@ export default defineConfig([
       name: n,
       entry: [`packages/${n}/src/index.ts`],
       format: ["esm", "cjs"],
-      minify: true,
+      // minify: true,
       outDir: `packages/${n}/dist`,
       target: "node16",
     }),
