@@ -24,13 +24,14 @@ export default defineConfig([
       target: "node16",
     }),
   ),
-  // 依赖各 package 的打包结果进行整体的二次打包
-  // 仅用作 examples 使用
+  // 仅用作 examples 使用，将所有用到 API 打包到一个文件中
+  // 不要用包名作导出，会强依赖单个包的打包结果进行二次打包
   {
     name: "mini-vue3",
     entry: ["packages/index.ts"],
     format: ["esm", "cjs"],
     clean: true,
+    outDir: "dist",
     // minify: true,
     target: "node16",
   },

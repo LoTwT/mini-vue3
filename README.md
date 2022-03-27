@@ -7,6 +7,10 @@ pnpm + monorepo + tsup + vitest 实现一个简单的 [vue3](https://github.com/
 ```bash
 # 因为 monorepo，需要先 build，模块间才能正确互相引用
 pnpm build
+
+# build 的 watch 模式
+pnpm dev
+
 # 运行测试
 pnpm test
 ```
