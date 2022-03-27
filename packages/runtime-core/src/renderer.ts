@@ -1,5 +1,5 @@
 import { createComponentInstance, setupComponent } from "./component"
-import { isObject } from "@mini-vue3/shared"
+import { ShapeFlags } from "@mini-vue3/shared"
 
 export function render(vnode, container) {
   // patch 递归处理
@@ -8,11 +8,11 @@ export function render(vnode, container) {
 
 function patch(vnode, container) {
   // 处理组件
-  // 判断是不是 element
+  const { shapeFlag } = vnode
 
-  if (typeof vnode.type === "string") {
+  if (shapeFlag & ShapeFlags.ELEMENT) {
     processElement(vnode, container)
-  } else if (isObject(vnode.type)) {
+  } else if (shapeFlag & ShapeFlags.STATEFUL_COMPONENT) {
     processComponent(vnode, container)
   }
 }
@@ -26,13 +26,13 @@ function processComponent(vnode, container) {
 }
 
 function mountElement(vnode, container) {
-  const { type, props, children } = vnode
+  const { type, props, children, shapeFlag } = vnode
 
   const el = (vnode.el = document.createElement(type))
 
-  if (typeof children === "string") {
+  if (shapeFlag & ShapeFlags.TEXT_CHILDREN) {
     el.textContent = children
-  } else if (Array.isArray(children)) {
+  } else if (shapeFlag & ShapeFlags.ARRAY_CHILDREN) {
     // vnode
     mountChildren(vnode, el)
   }
