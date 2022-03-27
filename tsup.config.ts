@@ -13,14 +13,6 @@ export default defineConfig([
   //   minify: true,
   //   target: "node16",
   // },
-  {
-    name: "mini-vue3",
-    entry: ["packages/index.ts"],
-    format: ["esm", "cjs", "iife"],
-    clean: true,
-    // minify: true,
-    target: "node16",
-  },
   ...packageNames.map(
     (n): Options => ({
       name: n,
@@ -32,4 +24,14 @@ export default defineConfig([
       target: "node16",
     }),
   ),
+  // 依赖各 package 的打包结果进行整体的二次打包
+  // 仅用作 examples 使用
+  {
+    name: "mini-vue3",
+    entry: ["packages/index.ts"],
+    format: ["esm", "cjs"],
+    clean: true,
+    // minify: true,
+    target: "node16",
+  },
 ])
