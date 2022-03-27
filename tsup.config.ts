@@ -13,11 +13,20 @@ export default defineConfig([
   //   minify: true,
   //   target: "node16",
   // },
+  {
+    name: "mini-vue3",
+    entry: ["packages/index.ts"],
+    format: ["esm", "cjs", "iife"],
+    clean: true,
+    // minify: true,
+    target: "node16",
+  },
   ...packageNames.map(
     (n): Options => ({
       name: n,
       entry: [`packages/${n}/src/index.ts`],
       format: ["esm", "cjs"],
+      clean: true,
       // minify: true,
       outDir: `packages/${n}/dist`,
       target: "node16",

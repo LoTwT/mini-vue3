@@ -1,4 +1,4 @@
-import { h } from "../../packages/runtime-core/dist/index.mjs"
+import { h } from "../../dist/index.mjs"
 
 export const App = {
   setup() {
