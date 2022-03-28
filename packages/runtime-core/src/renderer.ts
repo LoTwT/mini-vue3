@@ -39,7 +39,18 @@ function mountElement(vnode, container) {
 
   for (const key in props) {
     const val = props[key]
-    el.setAttribute(key, val)
+
+    // 判断 key 是不是以 on 开头
+    const isOn = (key: string) => /^on[A-Z]/.test(key)
+
+    if (isOn(key)) {
+      // 事件
+      const event = key.slice(2).toLowerCase()
+      el.addEventListener(event, val)
+    } else {
+      // 属性
+      el.setAttribute(key, val)
+    }
   }
 
   container.append(el)

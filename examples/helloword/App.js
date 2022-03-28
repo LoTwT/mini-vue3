@@ -17,6 +17,12 @@ export const App = {
       {
         id: "root",
         class: ["red", "bold"],
+        onClick() {
+          console.log("click")
+        },
+        onMousedown() {
+          console.log("mousedown")
+        }
       },
       // string
       // "hi, mini-vue3!",
