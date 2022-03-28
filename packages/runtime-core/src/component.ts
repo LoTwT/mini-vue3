@@ -1,6 +1,7 @@
 import { initProps } from "./componentProps"
 import { PublicInstanceProxyHandlers } from "./componentPublicInstance"
 import { shallowReadonly } from "@mini-vue3/reactivity"
+import { emit } from "./componentEmit"
 
 export function createComponentInstance(vnode) {
   const component = {
@@ -8,7 +9,10 @@ export function createComponentInstance(vnode) {
     type: vnode.type,
     setupState: {},
     props: {},
+    emit: (...args) => {},
   }
+
+  component.emit = emit.bind(null, component)
 
   return component
 }
@@ -33,7 +37,9 @@ function setupStatefulComponent(instance) {
   const { setup } = Component
 
   if (setup) {
-    const setupResult = setup(shallowReadonly(instance.props))
+    const setupResult = setup(shallowReadonly(instance.props), {
+      emit: instance.emit,
+    })
     handleSetupResult(instance, setupResult)
   }
 }
