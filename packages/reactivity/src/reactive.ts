@@ -1,3 +1,4 @@
+import { isObject } from "@mini-vue3/shared"
 import {
   mutableHandlers,
   readonlyHandlers,
@@ -41,5 +42,10 @@ export function isProxy(value) {
  * @returns
  */
 function createReactiveObject(raw, baseHandlers) {
+  if (!isObject(raw)) {
+    console.warn(`target ${raw} is not an object!`)
+    return raw
+  }
+
   return new Proxy(raw, baseHandlers)
 }
