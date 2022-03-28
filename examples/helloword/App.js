@@ -1,7 +1,9 @@
 import { h } from "../../dist/index.mjs"
+import { Foo } from "./Foo.js"
 
 window.self = null
 export const App = {
+  name: "App",
   setup() {
     // composition api
     return {
@@ -22,19 +24,22 @@ export const App = {
         },
         onMousedown() {
           console.log("mousedown")
-        }
+        },
       },
       // string
       // "hi, mini-vue3!",
 
       // setup varibles
-      "hi, mini-vue3!" + this.msg,
+      // "hi, mini-vue3!" + this.msg,
 
       // array
       // [
       //   h("p", { class: "red" }, "hi"),
       //   h("p", { class: "lightblue" }, "mini-vue3!"),
       // ],
+
+      // component
+      [h("div", {}, "hi, " + this.msg), h(Foo, { count: 1 })],
     )
   },
 }
