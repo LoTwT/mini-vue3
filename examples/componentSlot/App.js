@@ -1,4 +1,4 @@
-import { h } from "../../dist/index.mjs"
+import { h, createTextVNode } from "../../dist/index.mjs"
 import { Foo } from "./Foo.js"
 
 export const App = {
@@ -9,7 +9,10 @@ export const App = {
       Foo,
       {},
       {
-        header: ({ age }) => h("p", {}, "123" + age),
+        header: ({ age }) => [
+          h("p", {}, "123" + age),
+          createTextVNode("text node"),
+        ],
         footer: () => h("p", {}, "456"),
       },
     )
