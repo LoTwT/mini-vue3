@@ -2,6 +2,7 @@ import { initProps } from "./componentProps"
 import { PublicInstanceProxyHandlers } from "./componentPublicInstance"
 import { shallowReadonly } from "@mini-vue3/reactivity"
 import { emit } from "./componentEmit"
+import { initSlots } from "./componentSlots"
 
 export function createComponentInstance(vnode) {
   const component = {
@@ -9,6 +10,7 @@ export function createComponentInstance(vnode) {
     type: vnode.type,
     setupState: {},
     props: {},
+    slots: {},
     emit: (...args) => {},
   }
 
@@ -22,6 +24,7 @@ export function setupComponent(instance) {
   initProps(instance, instance.vnode.props)
 
   // 初始化 slots
+  initSlots(instance, instance.vnode.children)
 
   // 初始化有状态组件
   setupStatefulComponent(instance)
