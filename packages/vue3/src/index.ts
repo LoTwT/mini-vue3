@@ -1,2 +1,2 @@
-export * from "../../runtime-dom/src/index"
-export * from "../../reactivity/src/index"
+export * from "@mini-vue3/reactivity"
+export * from "@mini-vue3/runtime-dom"

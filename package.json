@@ -25,10 +25,6 @@
   },
   "homepage": "https://github.com/LoTwT/mini-vue3#readme",
   "devDependencies": {
-    "@mini-vue3/reactivity": "workspace:*",
-    "@mini-vue3/runtime-core": "workspace:*",
-    "@mini-vue3/runtime-dom": "workspace:*",
-    "@mini-vue3/shared": "workspace:*",
     "pnpm": "^6.32.4",
     "prettier": "^2.6.1",
     "typescript": "^4.6.3",
