@@ -4,7 +4,11 @@ import { Fragment, Text } from "./vnode"
 import { createAppApi } from "./createApp"
 
 export function createRenderer(options) {
-  const { createElement, patchProp, insert } = options
+  const {
+    createElement: hostCreateElement,
+    patchProp: hostPatchProp,
+    insert: hostInsert,
+  } = options
 
   function render(vnode, container) {
     // patch 递归处理
@@ -56,7 +60,7 @@ export function createRenderer(options) {
   function mountElement(vnode, container, parentComponent) {
     const { type, props, children, shapeFlag } = vnode
 
-    const el = (vnode.el = createElement(type))
+    const el = (vnode.el = hostCreateElement(type))
 
     if (shapeFlag & ShapeFlags.TEXT_CHILDREN) {
       el.textContent = children
@@ -85,10 +89,10 @@ export function createRenderer(options) {
     // container.append(el)
 
     for (const key in props) {
-      patchProp(el, key, props[key])
+      hostPatchProp(el, key, props[key])
     }
 
-    insert(el, container)
+    hostInsert(el, container)
   }
 
   function mountChildren(vnode, container, parentComponent) {
