@@ -27,7 +27,8 @@
   },
   "homepage": "https://github.com/LoTwT/mini-vue3#readme",
   "dependencies": {
-    "@mini-vue3/runtime-dom": "workspace:*"
+    "@mini-vue3/runtime-dom": "workspace:*",
+    "@mini-vue3/reactivity": "workspace:*"
   },
   "devDependencies": {
     "tsup": "^5.12.1"

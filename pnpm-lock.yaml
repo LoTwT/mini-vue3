@@ -63,9 +63,11 @@ importers:
 
   packages/vue3:
     specifiers:
+      '@mini-vue3/reactivity': workspace:*
       '@mini-vue3/runtime-dom': workspace:*
       tsup: ^5.12.1
     dependencies:
+      '@mini-vue3/reactivity': link:../reactivity
       '@mini-vue3/runtime-dom': link:../runtime-dom
     devDependencies:
       tsup: 5.12.1_typescript@4.6.3

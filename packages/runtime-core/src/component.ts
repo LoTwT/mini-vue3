@@ -1,6 +1,6 @@
 import { initProps } from "./componentProps"
 import { PublicInstanceProxyHandlers } from "./componentPublicInstance"
-import { shallowReadonly } from "@mini-vue3/reactivity"
+import { proxyRefs, shallowReadonly } from "@mini-vue3/reactivity"
 import { emit } from "./componentEmit"
 import { initSlots } from "./componentSlots"
 
@@ -13,6 +13,8 @@ export function createComponentInstance(vnode, parent) {
     slots: {},
     provides: parent ? parent.provides : {},
     parent,
+    isMounted: false,
+    subTree: {},
     emit: (...args) => {},
   }
 
@@ -54,7 +56,7 @@ function setupStatefulComponent(instance) {
 function handleSetupResult(instance, setupResult: object | Function) {
   // object => 注入组件实例
   if (typeof setupResult === "object") {
-    instance.setupState = setupResult
+    instance.setupState = proxyRefs(setupResult)
   }
 
   // Function => 渲染函数
