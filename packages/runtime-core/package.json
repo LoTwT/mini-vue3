@@ -5,6 +5,9 @@
   "main": "index.js",
   "module": "./dist/index.mjs",
   "types": "./dist/index.d.ts",
+  "scripts": {
+    "build": "tsup --dts"
+  },
   "files": [
     "index.js",
     "dist"
@@ -26,5 +29,8 @@
   "dependencies": {
     "@mini-vue3/shared": "workspace:*",
     "@mini-vue3/reactivity": "workspace:*"
+  },
+  "devDependencies": {
+    "tsup": "^5.12.1"
   }
 }

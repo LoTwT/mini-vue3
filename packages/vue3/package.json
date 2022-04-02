@@ -1,7 +1,7 @@
 {
-  "name": "@mini-vue3/reactivity",
+  "name": "mini-vue3",
   "version": "0.0.0",
-  "description": "reactivity",
+  "description": "mini-vue3",
   "main": "index.js",
   "module": "./dist/index.mjs",
   "types": "./dist/index.d.ts",
@@ -13,12 +13,12 @@
     "dist"
   ],
   "keywords": [
-    "reactivity"
+    "mini-vue3"
   ],
   "repository": {
     "type": "git",
     "url": "git+https://github.com/LoTwT/mini-vue3.git",
-    "directory": "packages/reactivity"
+    "directory": "packages/mini-vue3"
   },
   "author": "LoTwT",
   "license": "MIT",
@@ -27,7 +27,7 @@
   },
   "homepage": "https://github.com/LoTwT/mini-vue3#readme",
   "dependencies": {
-    "@mini-vue3/shared": "workspace:^0.0.0"
+    "@mini-vue3/runtime-dom": "workspace:*"
   },
   "devDependencies": {
     "tsup": "^5.12.1"

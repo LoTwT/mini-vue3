@@ -1,4 +1,4 @@
-import { h, renderSlots } from "../../dist/index.mjs"
+import { h, renderSlots } from "../../packages/vue3/dist/index.mjs"
 export const Foo = {
   name: "Foo",
   setup(props) {},

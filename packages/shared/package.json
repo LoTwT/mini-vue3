@@ -5,6 +5,9 @@
   "main": "index.js",
   "module": "./dist/index.mjs",
   "types": "./dist/index.d.ts",
+  "scripts": {
+    "build": "tsup --dts"
+  },
   "files": [
     "index.js",
     "dist"
@@ -22,5 +25,8 @@
   "bugs": {
     "url": "https://github.com/LoTwT/mini-vue3/issues"
   },
-  "homepage": "https://github.com/LoTwT/mini-vue3#readme"
+  "homepage": "https://github.com/LoTwT/mini-vue3#readme",
+  "devDependencies": {
+    "tsup": "^5.12.1"
+  }
 }

@@ -32,4 +32,4 @@ export function createApp(...args) {
   return renderer.createApp(...args)
 }
 
-export * from "../../runtime-core/src/index"
+export * from "@mini-vue3/runtime-core"

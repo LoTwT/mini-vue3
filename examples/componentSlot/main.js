@@ -1,4 +1,4 @@
-import { createApp } from "../../dist/index.mjs"
+import { createApp } from "../../packages/vue3/dist/index.mjs"
 import { App } from "./App.js"
 
 const rootContainer = document.querySelector("#app")

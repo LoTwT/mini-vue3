@@ -1,4 +1,4 @@
-import { h, getCurrentInstance } from "../../dist/index.mjs"
+import { h, getCurrentInstance } from "../../packages/vue3/dist/index.mjs"
 
 export const Foo = {
   setup() {

@@ -1,4 +1,4 @@
-import { h, createTextVNode } from "../../dist/index.mjs"
+import { h, createTextVNode } from "../../packages/vue3/dist/index.mjs"
 import { Foo } from "./Foo.js"
 
 export const App = {

@@ -4,8 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "dev": "tsup --dts --watch",
-    "build": "tsup --dts",
+    "build": "pnpm -r build",
     "test": "vitest",
     "prettier": "prettier --write ."
   },
@@ -30,13 +29,10 @@
     "@mini-vue3/runtime-core": "workspace:*",
     "@mini-vue3/runtime-dom": "workspace:*",
     "@mini-vue3/shared": "workspace:*",
+    "pnpm": "^6.32.4",
     "prettier": "^2.6.1",
-    "tsup": "^5.12.1",
     "typescript": "^4.6.3",
     "unplugin-auto-import": "^0.6.9",
     "vitest": "^0.8.1"
-  },
-  "dependencies": {
-    "fast-glob": "^3.2.11"
   }
 }

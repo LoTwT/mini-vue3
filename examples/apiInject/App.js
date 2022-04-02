@@ -1,4 +1,4 @@
-import { h, provide, inject } from "../../dist/index.mjs"
+import { h, provide, inject } from "../../packages/vue3/dist/index.mjs"
 
 const Provider = {
   name: "Provider",
