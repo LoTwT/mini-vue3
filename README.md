@@ -5,11 +5,8 @@ pnpm + monorepo + tsup + vitest 实现一个简单的 [vue3](https://github.com/
 ## scripts
 
 ```bash
-# 因为 monorepo，需要先 build，模块间才能正确互相引用
+# 使用 pnpm -r，借助 pnpm 自动分析依赖关系，递归打包 packages
 pnpm build
-
-# build 的 watch 模式
-pnpm dev
 
 # 运行测试
 pnpm test
@@ -39,18 +36,18 @@ pnpm test
 
 `@mini-vue3/runtime-core`
 
-- [ ] 支持组件类型
+- [x] 支持组件类型
 - [x] 支持 element 类型
-- [ ] 初始化 props
+- [x] 初始化 props
 - [ ] setup 可获取 props 和 context
-- [ ] 支持 component emit
+- [x] 支持 component emit
 - [ ] 支持 proxy
 - [ ] 可以在 render 函数中获取 setup 返回的对象
 - [ ] nextTick 的实现
-- [ ] 支持 getCurrentInstance
-- [ ] 支持 provide/inject
-- [ ] 支持最基础的 slots
-- [ ] 支持 Text 类型节点
+- [x] 支持 getCurrentInstance
+- [x] 支持 provide/inject
+- [x] 支持最基础的 slots
+- [x] 支持 Text 类型节点
 - [x] 支持 $el api
 
 ## shared
