@@ -1,0 +1,30 @@
+{
+  "name": "@mini-vue3/runtime-dom",
+  "version": "0.0.0",
+  "description": "runtime-dom",
+  "main": "index.js",
+  "module": "./dist/index.mjs",
+  "types": "./dist/index.d.ts",
+  "files": [
+    "index.js",
+    "dist"
+  ],
+  "keywords": [
+    "runtime-dom"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/LoTwT/mini-vue3.git",
+    "directory": "packages/runtime-dom"
+  },
+  "author": "LoTwT",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/LoTwT/mini-vue3/issues"
+  },
+  "homepage": "https://github.com/LoTwT/mini-vue3#readme",
+  "dependencies": {
+    "@mini-vue3/runtime-core": "workspace:*",
+    "@mini-vue3/shared": "workspace:*"
+  }
+}

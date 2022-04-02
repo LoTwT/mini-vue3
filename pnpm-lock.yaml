@@ -6,6 +6,7 @@ importers:
     specifiers:
       '@mini-vue3/reactivity': workspace:*
       '@mini-vue3/runtime-core': workspace:*
+      '@mini-vue3/runtime-dom': workspace:*
       '@mini-vue3/shared': workspace:*
       fast-glob: ^3.2.11
       prettier: ^2.6.1
@@ -18,6 +19,7 @@ importers:
     devDependencies:
       '@mini-vue3/reactivity': link:packages/reactivity
       '@mini-vue3/runtime-core': link:packages/runtime-core
+      '@mini-vue3/runtime-dom': link:packages/runtime-dom
       '@mini-vue3/shared': link:packages/shared
       prettier: 2.6.1
       tsup: 5.12.1_typescript@4.6.3
@@ -37,6 +39,14 @@ importers:
       '@mini-vue3/shared': workspace:*
     dependencies:
       '@mini-vue3/reactivity': link:../reactivity
+      '@mini-vue3/shared': link:../shared
+
+  packages/runtime-dom:
+    specifiers:
+      '@mini-vue3/runtime-core': workspace:*
+      '@mini-vue3/shared': workspace:*
+    dependencies:
+      '@mini-vue3/runtime-core': link:../runtime-core
       '@mini-vue3/shared': link:../shared
 
   packages/shared:
