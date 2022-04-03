@@ -3,6 +3,7 @@ import { ShapeFlags, EMPTY_OBJ } from "@mini-vue3/shared"
 import { Fragment, Text } from "./vnode"
 import { createAppApi } from "./createApp"
 import { effect } from "@mini-vue3/reactivity"
+import { shouldUpdateComponent } from "./componentUpdateUtils"
 
 export function createRenderer(options) {
   const {
@@ -267,7 +268,21 @@ export function createRenderer(options) {
   }
 
   function processComponent(n1, n2, container, parentComponent, anchor) {
-    mountComponent(n2, container, parentComponent, anchor)
+    if (!n1) mountComponent(n2, container, parentComponent, anchor)
+    else updateComponent(n1, n2)
+  }
+
+  function updateComponent(n1, n2) {
+    const instance = (n2.component = n1.component)
+
+    if (shouldUpdateComponent(n1, n2)) {
+      // 把新的 VNode 挂载到实例上
+      instance.next = n2
+      instance.update()
+    } else {
+      n2.el = n1.el
+      n2.vnode = n2
+    }
   }
 
   function mountElement(vnode, container, parentComponent, anchor) {
@@ -316,14 +331,17 @@ export function createRenderer(options) {
 
   function mountComponent(initialVNode, container, parentComponent, anchor) {
     // 创建组件实例
-    const instance = createComponentInstance(initialVNode, parentComponent)
+    const instance = (initialVNode.component = createComponentInstance(
+      initialVNode,
+      parentComponent,
+    ))
 
     setupComponent(instance)
     setupRenderEffect(instance, initialVNode, container, anchor)
   }
 
   function setupRenderEffect(instance, initialVNode, container, anchor) {
-    effect(() => {
+    instance.update = effect(() => {
       if (!instance.isMounted) {
         const { proxy } = instance
         const subTree = (instance.subTree = instance.render.call(proxy))
@@ -336,6 +354,13 @@ export function createRenderer(options) {
         initialVNode.el = subTree.el
         instance.isMounted = true
       } else {
+        // 更新 props，需要新的 VNode
+        const { next, vnode } = instance
+        if (next) {
+          next.el = vnode.el
+          updateComponentPreRender(instance, next)
+        }
+
         const { proxy } = instance
         const subTree = instance.render.call(proxy)
         const prevSubTree = instance.subTree
@@ -348,6 +373,12 @@ export function createRenderer(options) {
 
   return {
     createApp: createAppApi(render),
+  }
+
+  function updateComponentPreRender(instance, nextVNode) {
+    instance.vnode = nextVNode
+    instance.next = null
+    instance.props = nextVNode.props
   }
 }
 
