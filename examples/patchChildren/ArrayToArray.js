@@ -168,25 +168,40 @@ import { h, ref } from "../../packages/vue3/dist/index.mjs"
 // 综合
 // a b (c d e z) f g
 // a b (d c y e) f g
+// const prevChildren = [
+//   h("div", { key: "A" }, "A"),
+//   h("div", { key: "B" }, "B"),
+//   h("div", { key: "C" }, "C"),
+//   h("div", { key: "D" }, "D"),
+//   h("div", { key: "E" }, "E"),
+//   h("div", { key: "Z" }, "Z"),
+//   h("div", { key: "F" }, "F"),
+//   h("div", { key: "G" }, "G"),
+// ]
+// const nextChildren = [
+//   h("div", { key: "A" }, "A"),
+//   h("div", { key: "B" }, "B"),
+//   h("div", { key: "D" }, "D"),
+//   h("div", { key: "C" }, "C"),
+//   h("div", { key: "Y" }, "Y"),
+//   h("div", { key: "E" }, "E"),
+//   h("div", { key: "F" }, "F"),
+//   h("div", { key: "G" }, "G"),
+// ]
+
+// fix
+// C 应该是移动的，而不是被重新创建的 #4986
 const prevChildren = [
   h("div", { key: "A" }, "A"),
+  h("div", {}, "C"),
   h("div", { key: "B" }, "B"),
-  h("div", { key: "C" }, "C"),
   h("div", { key: "D" }, "D"),
-  h("div", { key: "E" }, "E"),
-  h("div", { key: "Z" }, "Z"),
-  h("div", { key: "F" }, "F"),
-  h("div", { key: "G" }, "G"),
 ]
 const nextChildren = [
   h("div", { key: "A" }, "A"),
   h("div", { key: "B" }, "B"),
+  h("div", {}, "C"),
   h("div", { key: "D" }, "D"),
-  h("div", { key: "C" }, "C"),
-  h("div", { key: "Y" }, "Y"),
-  h("div", { key: "E" }, "E"),
-  h("div", { key: "F" }, "F"),
-  h("div", { key: "G" }, "G"),
 ]
 
 export default {
