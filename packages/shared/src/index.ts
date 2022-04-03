@@ -24,3 +24,5 @@ export const camelize = (str: string) => {
 }
 
 export { ShapeFlags } from "./shapeFlags"
+
+export const EMPTY_OBJ = {}

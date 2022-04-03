@@ -4,17 +4,18 @@ function createElement(type) {
   return document.createElement(type)
 }
 
-function patchProp(el, key, val) {
+function patchProp(el, key, prevVal, nextVal) {
   // 判断 key 是不是以 on 开头
   const isOn = (key: string) => /^on[A-Z]/.test(key)
 
   if (isOn(key)) {
     // 事件
     const event = key.slice(2).toLowerCase()
-    el.addEventListener(event, val)
+    el.addEventListener(event, nextVal)
   } else {
     // 属性
-    el.setAttribute(key, val)
+    if (nextVal === undefined || nextVal === null) el.removeAttribute(key)
+    else el.setAttribute(key, nextVal)
   }
 }
 
