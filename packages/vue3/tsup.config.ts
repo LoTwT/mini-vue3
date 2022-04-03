@@ -8,5 +8,5 @@ export default defineConfig({
   // minify: true,
   outDir: `dist`,
   target: "node16",
-  noExternal: ["@mini-vue3/reactivity", "@mini-vue3/runtime-dom"]
+  noExternal: ["@mini-vue3/reactivity", "@mini-vue3/runtime-dom"],
 })
