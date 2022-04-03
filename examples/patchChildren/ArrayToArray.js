@@ -69,12 +69,58 @@ import { h, ref } from "../../packages/vue3/dist/index.mjs"
 // 右侧
 // a (b c)
 // (b c)
+// const prevChildren = [
+//   h("div", { key: "A" }, "A"),
+//   h("div", { key: "B" }, "B"),
+//   h("div", { key: "C" }, "C"),
+// ]
+// const nextChildren = [h("div", { key: "B" }, "B"), h("div", { key: "C" }, "C")]
+
+// 5. 中间 (乱序)
+// 删除旧的 (在旧的里面存在，新的里面不存在)
+// 5.1
+// a b (c d) f g
+// a b (e c) f g
+// d 在新的里面没有 => 删除
+// c props 变化
+// const prevChildren = [
+//   h("div", { key: "A" }, "A"),
+//   h("div", { key: "B" }, "B"),
+//   h("div", { key: "C", id: "c-prev" }, "C"),
+//   h("div", { key: "D" }, "D"),
+//   h("div", { key: "F" }, "F"),
+//   h("div", { key: "G" }, "G"),
+// ]
+// const nextChildren = [
+//   h("div", { key: "A" }, "A"),
+//   h("div", { key: "B" }, "B"),
+//   h("div", { key: "E" }, "E"),
+//   h("div", { key: "C", id: "c-next" }, "C"),
+//   h("div", { key: "F" }, "F"),
+//   h("div", { key: "G" }, "G"),
+// ]
+
+// 5.1.1
+// a b (c e d) f g
+// a b (e c ) f g
+// 中间，旧的比新的多，多出来的可以直接删除
 const prevChildren = [
   h("div", { key: "A" }, "A"),
   h("div", { key: "B" }, "B"),
-  h("div", { key: "C" }, "C"),
+  h("div", { key: "C", id: "c-prev" }, "C"),
+  h("div", { key: "E" }, "E"),
+  h("div", { key: "D" }, "D"),
+  h("div", { key: "F" }, "F"),
+  h("div", { key: "G" }, "G"),
 ]
-const nextChildren = [h("div", { key: "B" }, "B"), h("div", { key: "C" }, "C")]
+const nextChildren = [
+  h("div", { key: "A" }, "A"),
+  h("div", { key: "B" }, "B"),
+  h("div", { key: "E" }, "E"),
+  h("div", { key: "C", id: "c-next" }, "C"),
+  h("div", { key: "F" }, "F"),
+  h("div", { key: "G" }, "G"),
+]
 
 export default {
   name: "ArrayToArray",

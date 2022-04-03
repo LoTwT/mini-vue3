@@ -169,7 +169,46 @@ export function createRenderer(options) {
         i++
       }
     } else {
-      // 乱序
+      // 中间 (乱序)
+      let s1 = i
+      let s2 = i
+
+      const toBePatched = e2 - s2 + 1
+      let patched = 0
+
+      const keyToNewIndexMap = new Map()
+
+      for (let j = s2; j <= e2; j++) {
+        const nextChild = c2[j]
+        keyToNewIndexMap.set(nextChild.key, j)
+      }
+
+      for (let j = s1; j <= e1; j++) {
+        const prevChild = c1[j]
+
+        if (patched >= toBePatched) {
+          hostRemove(prevChild.el)
+          continue
+        }
+
+        let newIndex
+        if (prevChild.key != null) {
+          newIndex = keyToNewIndexMap.get(prevChild.key)
+        } else {
+          for (let k = s2; k < e2; k++) {
+            if (isSameVNodeType(prevChild, c2[k])) {
+              newIndex = k
+              break
+            }
+          }
+        }
+
+        if (newIndex === undefined) hostRemove(prevChild.el)
+        else {
+          patch(prevChild, c2[newIndex], container, parentComponent, null)
+          patched++
+        }
+      }
     }
   }
 
