@@ -154,6 +154,7 @@ function parseTag(context, type: TagType) {
 function createRoot(children) {
   return {
     children,
+    type: NodeTypes.ROOT,
   }
 }
 
