@@ -60,10 +60,10 @@ pnpm test
 
 ## compiler-core
 
-- [ ] 解析插值
-- [ ] 解析 element
-- [ ] 解析 text
+- [x] 解析插值
+- [x] 解析 element
+- [x] 解析 text
 
 ## runtime-dom
 
-- [ ] 支持 custom renderer
+- [x] 支持 custom renderer
