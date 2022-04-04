@@ -18,8 +18,10 @@ importers:
 
   packages/compiler-core:
     specifiers:
+      '@mini-vue3/shared': workspace:*
       tsup: ^5.12.1
     devDependencies:
+      '@mini-vue3/shared': link:../shared
       tsup: 5.12.1_typescript@4.6.3
 
   packages/reactivity:

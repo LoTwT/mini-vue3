@@ -26,3 +26,5 @@ export const camelize = (str: string) => {
 export { ShapeFlags } from "./shapeFlags"
 
 export const EMPTY_OBJ = {}
+
+export const isString = (value) => typeof value === "string"

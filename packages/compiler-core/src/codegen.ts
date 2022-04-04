@@ -1,5 +1,10 @@
 import { NodeTypes } from "./ast"
-import { helperMapName, TO_DISPLAY_STRING } from "./runtimeHelpers"
+import {
+  CREATE_ELEMENT_VNODE,
+  helperMapName,
+  TO_DISPLAY_STRING,
+} from "./runtimeHelpers"
+import { isString } from "@mini-vue3/shared"
 
 export function generate(ast) {
   const context = createCodegenContext()
@@ -42,7 +47,15 @@ function genNode(node, context) {
       break
 
     case NodeTypes.SIMPLE_EXPRESSION:
-      genExpression(node, context)
+      genSimpleExpression(node, context)
+      break
+
+    case NodeTypes.ELEMENT:
+      genElement(node, context)
+      break
+
+    case NodeTypes.COMPOUND_EXPRESSION:
+      genCompoundExpression(node, context)
       break
 
     default:
@@ -50,7 +63,41 @@ function genNode(node, context) {
   }
 }
 
-function genExpression(node, context) {
+function genCompoundExpression(node, context) {
+  const children = node.children
+
+  for (let i = 0; i < children.length; i++) {
+    const child = children[i]
+    if (isString(child)) {
+      context.push(child)
+    } else {
+      genNode(child, context)
+    }
+  }
+}
+
+function genElement(node, context) {
+  const { tag, children, props } = node
+  context.push(`${context.helper(CREATE_ELEMENT_VNODE)}(`)
+  genNodeList(genNullable([tag, props, children]), context)
+  context.push(")")
+}
+
+function genNodeList(nodes, context) {
+  for (let i = 0; i < nodes.length; i++) {
+    const node = nodes[i]
+    if (isString(node)) context.push(node)
+    else genNode(node, context)
+
+    if (i < nodes.length - 1) context.push(", ")
+  }
+}
+
+function genNullable(args) {
+  return args.map((arg) => arg || "null")
+}
+
+function genSimpleExpression(node, context) {
   context.push(`${node.content}`)
 }
 
@@ -61,7 +108,7 @@ function genInterpolation(node, context) {
 }
 
 function genText(node, context) {
-  context.push(`'${node.content}'`)
+  context.push(`"${node.content}"`)
 }
 
 function createCodegenContext() {

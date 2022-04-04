@@ -27,6 +27,7 @@
   },
   "homepage": "https://github.com/LoTwT/mini-vue3#readme",
   "devDependencies": {
+    "@mini-vue3/shared": "workspace:*",
     "tsup": "^5.12.1"
   }
 }
