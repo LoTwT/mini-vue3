@@ -60,10 +60,14 @@ pnpm test
 
 ## compiler-core
 
+`@mini-vue3/compiler-core`
+
 - [x] 解析插值
 - [x] 解析 element
 - [x] 解析 text
 
 ## runtime-dom
+
+`@mini-vue3/runtime-dom`
 
 - [x] 支持 custom renderer
