@@ -16,6 +16,12 @@ importers:
       unplugin-auto-import: 0.6.9
       vitest: 0.8.1
 
+  packages/compiler-core:
+    specifiers:
+      tsup: ^5.12.1
+    devDependencies:
+      tsup: 5.12.1_typescript@4.6.3
+
   packages/reactivity:
     specifiers:
       '@mini-vue3/shared': workspace:^0.0.0
