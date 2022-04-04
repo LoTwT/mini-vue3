@@ -24,10 +24,11 @@ function parseInterpolation(context) {
   // 内容长度
   const rawContentLength = closeIndex - openDelimiter.length
   // 截取内容
-  const rawContent = context.source.slice(0, rawContentLength)
+  const rawContent = parseTextData(context, rawContentLength)
+
   const content = rawContent.trim()
 
-  advanceBy(context, rawContentLength + closeDelimiter.length)
+  advanceBy(context, closeDelimiter.length)
 
   return {
     type: NodeTypes.INTERPOLATION,
@@ -53,16 +54,39 @@ function parseChildren(context) {
   let node
 
   if (s.startsWith("{{")) {
+    // 插值
     node = parseInterpolation(context)
   } else if (s[0] === "<") {
+    // 标签
     if (/[a-z]/i.test(s[1])) {
       node = parseElement(context)
     }
   }
 
-  node && nodes.push(node)
+  if (!node) {
+    // 文本
+    node = parseText(context)
+  }
+
+  nodes.push(node)
 
   return nodes
+}
+
+function parseText(context) {
+  const content = parseTextData(context, context.source.length)
+
+  return {
+    type: NodeTypes.TEXT,
+    content,
+  }
+}
+
+function parseTextData(context, length: number) {
+  const content = context.source.slice(0, length)
+  advanceBy(context, length)
+
+  return content
 }
 
 function parseElement(context) {
